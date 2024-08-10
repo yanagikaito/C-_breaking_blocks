@@ -3,6 +3,17 @@
 #include "ProjConf.h"
 #include "Sub.h"
 
+// ゲームの変数を初期化する関数
+void Game_Ini() {}
+
+// ゲームを計算する関数
+void Game_Cal() {}
+
+// ゲームを描画する関数
+void Game_Draw() {}
+
+// ゲームオーバー時の処理を行う関数
+void Game_End() {}
 
 // プログラムは WinMain から始まります
 int WINAPI WinMain(
@@ -26,6 +37,8 @@ int WINAPI WinMain(
 	SetDrawScreen(DX_SCREEN_BACK);					// 描画先画面を裏画面にする
 	SetAlwaysRunFlag(TRUE);							// ウインドウ非アクティブ状態でも処理を続行する
 
+	Game_Ini();
+
 	/*** FPS初期化 ***/
 	Fps.FPSInit();
 
@@ -45,6 +58,9 @@ int WINAPI WinMain(
 		Key.GetKey() == 0 &&		// キーボード入力情報取得
 		ProcessMessage() == 0)		// ウインドウのメッセージを処理
 	{
+		Game_Cal();
+		Game_Draw();
+
 		/* FPS計測開始 */
 		Fps.FPSCheck();
 
