@@ -4,6 +4,7 @@
 #include "Sub.h"
 
 
+
 // ƒvƒƒOƒ‰ƒ€‚Í WinMain ‚©‚çn‚Ü‚è‚Ü‚·
 int WINAPI WinMain(
 	_In_ HINSTANCE hInstance, 
