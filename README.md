@@ -1,4 +1,5 @@
-#yanagikaito
+# yanagikaito
+
 yanagikaitoのゲームプログラミングの学習のためのリポジトリです。
 
 C++でDXライブラリをを使ってブロック崩しのゲームを作りたいと思います。
