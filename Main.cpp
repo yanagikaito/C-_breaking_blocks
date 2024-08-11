@@ -19,7 +19,7 @@ void Game_Ini() {
 			Block[x][y] = {
 				// 幅が100
 				x * 100 ,
-				100 + y * 50,
+				50 + y * 50,
 				100,
 				// 高さが50
 				50,
@@ -39,7 +39,24 @@ void Game_Cal() {
 // ゲームを描画する関数
 void Game_Draw() {
 
+	// ブロック
+	for (int y = 0; y < BLOCK_NUM_Y; y = y + 1) {
+		for (int x = 0; x < BLOCK_NUM_X; x = x + 1) {
+			if (Block[x][y].flag == TRUE) {
+				// ブロックの左上のx座標
+				DrawBox(Block[x][y].x,
+					// 左上のy座標
+					Block[x][y].y,
+					// 右下のx座標
+					Block[x][y].x + Block[x][y].w,
+					// 右下のy座標
+					Block[x][y].y + Block[x][y].h,
+					GetColor(255, 0, 0),
+					TRUE);
+			}
+		}
 	}
+}
 
 // ゲームオーバー時の処理を行う関数
 void Game_End() {
@@ -52,7 +69,7 @@ int WINAPI WinMain(
 	_In_ LPSTR lpCmdLine, 
 	_In_ int nShowCmd)
 {
-	Col color;
+
 	ChangeWindowMode(TRUE);							// ウィンドウモードで起動
 	if (DxLib_Init() == -1)							// ＤＸライブラリ初期化処理
 	{
@@ -72,8 +89,11 @@ int WINAPI WinMain(
 	/*** FPS初期化 ***/
 	Fps.FPSInit();
 
-	/*** Read ***/
+	// カラー定義
 	Col();
+	Col color;
+
+	/*** Read ***/
 	Fon.Read();
 #ifdef DEF_SOUND_VALID
 	Snd.Read();
