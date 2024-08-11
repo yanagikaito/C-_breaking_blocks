@@ -7,10 +7,27 @@
 // ブロック定義
 Ract Block[BLOCK_NUM_X][BLOCK_NUM_Y];
 
+// バー定義
+Ract Bar;
+
 // ゲームの変数を初期化する関数
 void Game_Ini() {
 
+	// ブロックに関する変数初期化
+	for (int y = 0; y < BLOCK_NUM_Y; y = y + 1) {
+		for (int x = 0; x < BLOCK_NUM_X; x = x + 1) {
+			Block[x][y] = {
+				// 幅が100
+				x * 100 ,
+				100 + y * 50,
+				100,
+				// 高さが50
+				50,
+				// ボールが全て存在する
+				TRUE };
+		}
 	}
+}
 // ゲームを計算する関数
 void Game_Cal() {
 
@@ -19,6 +36,7 @@ void Game_Cal() {
 void Game_Draw() {
 
 	}
+
 // ゲームオーバー時の処理を行う関数
 void Game_End() {
 
