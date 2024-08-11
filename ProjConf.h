@@ -17,3 +17,7 @@
 #define MillSecond 1000.0f		// 1ミリ秒
 #define WaitTimeMill 3000		// 最大で待てるミリ数
 #define GameFPS 60				// 設定したいFPS
+
+/*** ブロックの個数 ***/
+#define BLOCK_NUM_X (16)
+#define BLOCK_NUM_Y (3)
