@@ -61,6 +61,10 @@ void Game_Cal() {
     {
         Bar.x = Bar.x - 10;
     }
+
+    // ボールの座標計算
+    Ball.Y = Ball.Y + Ball_Speed.y;
+    Ball.X = Ball.X + Ball_Speed.x;
 }
 // ゲームを描画する関数
 void Game_Draw() {
@@ -233,12 +237,6 @@ int WINAPI WinMain(
 
     /*** Read ***/
     Fon.Read();
-#ifdef DEF_SOUND_VALID
-    Snd.Read();
-
-    /*** BGM開始 ***/
-    PlaySoundMem(Snd.BgmSound, DX_PLAYTYPE_LOOP);
-#endif /* DEF_SOUND_VALID */
 
     /*** ループ処理 ***/
     while (ScreenFlip() == 0 &&		// 裏画面の内容を表画面に反映
