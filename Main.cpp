@@ -4,53 +4,53 @@
 #include "Sub.h"
 #include "Ract.h"
 
-// ƒuƒƒbƒN’è‹`
+// ãƒ–ãƒ­ãƒƒã‚¯å®šç¾©
 Ract Block[BLOCK_NUM_X][BLOCK_NUM_Y];
 
-// ƒo[’è‹`
+// ãƒãƒ¼å®šç¾©
 Ract Bar;
 
-// ƒJƒ‰[’è‹`
+// ã‚«ãƒ©ãƒ¼å®šç¾©
 Col color;
 
-// ƒ{[ƒ‹’è‹`
+// ãƒœãƒ¼ãƒ«å®šç¾©
 Cir Ball;
 
-// ƒ{[ƒ‹‚Ì‘¬“x’è‹`
+// ãƒœãƒ¼ãƒ«ã®é€Ÿåº¦å®šç¾©
 Speed Ball_Speed;
 
-// ƒL[ƒ{[ƒh“ü—Íî•ñ’è‹`
+// ã‚­ãƒ¼ãƒœãƒ¼ãƒ‰å…¥åŠ›æƒ…å ±å®šç¾©
 char allkey[256];
 
-// ƒQ[ƒ€‚Ì•Ï”‚ð‰Šú‰»‚·‚éŠÖ”
+// ã‚²ãƒ¼ãƒ ã®å¤‰æ•°ã‚’åˆæœŸåŒ–ã™ã‚‹é–¢æ•°
 void Game_Ini() {
 
-    // ƒuƒƒbƒN‚ÉŠÖ‚·‚é•Ï”‰Šú‰»
+    // ãƒ–ãƒ­ãƒƒã‚¯ã«é–¢ã™ã‚‹å¤‰æ•°åˆæœŸåŒ–
     for (int y = 0; y < BLOCK_NUM_Y; y = y + 1) {
         for (int x = 0; x < BLOCK_NUM_X; x = x + 1) {
             Block[x][y] = {
-                // •‚ª100
+                // å¹…ãŒ100
                 x * 100 ,
                 50 + y * 50,
                 100,
-                // ‚‚³‚ª50
+                // é«˜ã•ãŒ50
                 50,
-                // ƒ{[ƒ‹‚ª‘S‚Ä‘¶Ý‚·‚é
+                // ãƒœãƒ¼ãƒ«ãŒå…¨ã¦å­˜åœ¨ã™ã‚‹
                 TRUE };
         }
     }
 
-    // ƒo[‚ÉŠÖ‚·‚é•Ï”‰Šú‰»
+    // ãƒãƒ¼ã«é–¢ã™ã‚‹å¤‰æ•°åˆæœŸåŒ–
     Bar = { 400,600,150,30 };
 
-    // ƒ{[ƒ‹‚ÉŠÖ‚·‚é•Ï”‰Šú‰»
+    // ãƒœãƒ¼ãƒ«ã«é–¢ã™ã‚‹å¤‰æ•°åˆæœŸåŒ–
     Ball = { 450,500,10 };
 
-    // ƒ{[ƒ‹‚Ì‘¬“x‚ÉŠÖ‚·‚é•Ï”‰Šú‰»
+    // ãƒœãƒ¼ãƒ«ã®é€Ÿåº¦ã«é–¢ã™ã‚‹å¤‰æ•°åˆæœŸåŒ–
     Ball_Speed = { 0,-10 };
 }
 
-// ƒQ[ƒ€‚ðŒvŽZ‚·‚éŠÖ”
+// ã‚²ãƒ¼ãƒ ã‚’è¨ˆç®—ã™ã‚‹é–¢æ•°
 void Game_Cal() {
 
     if (allkey[KEY_INPUT_D] != 0)
@@ -62,57 +62,57 @@ void Game_Cal() {
         Bar.x = Bar.x - 10;
     }
 
-    // ƒ{[ƒ‹‚ÌÀ•WŒvŽZ
+    // ãƒœãƒ¼ãƒ«ã®åº§æ¨™è¨ˆç®—
     Ball.Y = Ball.Y + Ball_Speed.y;
     Ball.X = Ball.X + Ball_Speed.x;
 }
-// ƒQ[ƒ€‚ð•`‰æ‚·‚éŠÖ”
+// ã‚²ãƒ¼ãƒ ã‚’æç”»ã™ã‚‹é–¢æ•°
 void Game_Draw() {
 
-    // ƒuƒƒbƒN
+    // ãƒ–ãƒ­ãƒƒã‚¯
     for (int y = 0; y < BLOCK_NUM_Y; y = y + 1) {
         for (int x = 0; x < BLOCK_NUM_X; x = x + 1) {
             if (Block[x][y].flag == TRUE) {
                 switch (y) {
                 case 0:
-                    // ƒuƒƒbƒN‚Ì¶ã‚ÌxÀ•W
+                    // ãƒ–ãƒ­ãƒƒã‚¯ã®å·¦ä¸Šã®xåº§æ¨™
                     DrawBox(Block[x][y].x,
-                        // ¶ã‚ÌyÀ•W
+                        // å·¦ä¸Šã®yåº§æ¨™
                         Block[x][y].y,
-                        // ‰E‰º‚ÌxÀ•W
+                        // å³ä¸‹ã®xåº§æ¨™
                         Block[x][y].x + Block[x][y].w,
-                        // ‰E‰º‚ÌyÀ•W
+                        // å³ä¸‹ã®yåº§æ¨™
                         Block[x][y].y + Block[x][y].h,
                         color.Red,
                         TRUE);
                     break;
                 case 1:
-                    // ƒuƒƒbƒN‚Ì¶ã‚ÌxÀ•W
+                    // ãƒ–ãƒ­ãƒƒã‚¯ã®å·¦ä¸Šã®xåº§æ¨™
                     DrawBox(Block[x][y].x,
-                        // ¶ã‚ÌyÀ•W
+                        // å·¦ä¸Šã®yåº§æ¨™
                         Block[x][y].y,
-                        // ‰E‰º‚ÌxÀ•W
+                        // å³ä¸‹ã®xåº§æ¨™
                         Block[x][y].x + Block[x][y].w,
-                        // ‰E‰º‚ÌyÀ•W
+                        // å³ä¸‹ã®yåº§æ¨™
                         Block[x][y].y + Block[x][y].h,
                         color.Green,
                         TRUE);
                     break;
                 case 2:
-                    // ƒuƒƒbƒN‚Ì¶ã‚ÌxÀ•W
+                    // ãƒ–ãƒ­ãƒƒã‚¯ã®å·¦ä¸Šã®xåº§æ¨™
                     DrawBox(Block[x][y].x,
-                        // ¶ã‚ÌyÀ•W
+                        // å·¦ä¸Šã®yåº§æ¨™
                         Block[x][y].y,
-                        // ‰E‰º‚ÌxÀ•W
+                        // å³ä¸‹ã®xåº§æ¨™
                         Block[x][y].x + Block[x][y].w,
-                        // ‰E‰º‚ÌyÀ•W
+                        // å³ä¸‹ã®yåº§æ¨™
                         Block[x][y].y + Block[x][y].h,
                         color.Blue,
                         TRUE);
                     break;
                 }
 
-                // –Ô–Ú
+                // ç¶²ç›®
                 DrawBox(Block[x][y].x,
                     Block[x][y].y,
                     Block[x][y].x + Block[x][y].w,
@@ -120,7 +120,7 @@ void Game_Draw() {
                     color.Black,
                     FALSE);
 
-                // À•W
+                // åº§æ¨™
                 DrawFormatString(
                     Block[x][y].x,
                     Block[x][y].y,
@@ -132,14 +132,14 @@ void Game_Draw() {
         }
     }
 
-    // ƒo[
+    // ãƒãƒ¼
     DrawBox(Bar.x, Bar.y,
         Bar.x + Bar.w,
         Bar.y + Bar.h,
         color.White,
         TRUE);
 
-    // ƒo[À•W
+    // ãƒãƒ¼åº§æ¨™
     DrawFormatString(
         Bar.x,
         Bar.y,
@@ -156,7 +156,7 @@ void Game_Draw() {
         color.Red,
         TRUE);
 
-    // À•W
+    // åº§æ¨™
     DrawFormatString(
         Ball.X,
         Ball.Y,
@@ -175,25 +175,25 @@ void Game_Draw() {
         Ball_Speed.y);
 }
 
-/*** KeyƒNƒ‰ƒX ***/
+/*** Keyã‚¯ãƒ©ã‚¹ ***/
 class
 {
 public:
-    int input[256];		// ƒL[ƒ{[ƒh“ü—Íî•ñ
+    int input[256];		// ã‚­ãƒ¼ãƒœãƒ¼ãƒ‰å…¥åŠ›æƒ…å ±
 
     int GetKey()
     {
         GetHitKeyStateAll(allkey);
         for (int i = 0; i < 256; i++)
         {
-            if (allkey[i] == 1) // “Á’è‚ÌƒL[‚Í‰Ÿ‚³‚ê‚Ä‚¢‚é‚©
+            if (allkey[i] == 1) // ç‰¹å®šã®ã‚­ãƒ¼ã¯æŠ¼ã•ã‚Œã¦ã„ã‚‹ã‹
             {
-                if (input[i] < DEF_KEY_PRESS_TIME) // ’·‰Ÿ‚µãŒÀ‚Ü‚Å‰Ÿ‚³‚ê‚Ä‚¢‚é‚©‚Ç‚¤‚©
+                if (input[i] < DEF_KEY_PRESS_TIME) // é•·æŠ¼ã—ä¸Šé™ã¾ã§æŠ¼ã•ã‚Œã¦ã„ã‚‹ã‹ã©ã†ã‹
                 {
-                    input[i] = input[i] + 1; // •Û‘¶
+                    input[i] = input[i] + 1; // ä¿å­˜
                 }
             }
-            else if (allkey[i] == 0) // “Á’è‚ÌƒL[‚Í‰Ÿ‚³‚ê‚Ä‚¢‚È‚¢‚©
+            else if (allkey[i] == 0) // ç‰¹å®šã®ã‚­ãƒ¼ã¯æŠ¼ã•ã‚Œã¦ã„ãªã„ã‹
             {
                 input[i] = 0;
             }
@@ -204,11 +204,11 @@ private:
 
 }Key;
 
-// ƒQ[ƒ€ƒI[ƒo[Žž‚Ìˆ—‚ðs‚¤ŠÖ”
+// ã‚²ãƒ¼ãƒ ã‚ªãƒ¼ãƒãƒ¼æ™‚ã®å‡¦ç†ã‚’è¡Œã†é–¢æ•°
 void Game_End() {
 
 }
-// ƒvƒƒOƒ‰ƒ€‚Í WinMain ‚©‚çŽn‚Ü‚è‚Ü‚·
+// ãƒ—ãƒ­ã‚°ãƒ©ãƒ ã¯ WinMain ã‹ã‚‰å§‹ã¾ã‚Šã¾ã™
 int WINAPI WinMain(
     _In_ HINSTANCE hInstance,
     _In_opt_  HINSTANCE hPrevInstance,
@@ -216,53 +216,53 @@ int WINAPI WinMain(
     _In_ int nShowCmd)
 {
 
-    ChangeWindowMode(TRUE);							// ƒEƒBƒ“ƒhƒEƒ‚[ƒh‚Å‹N“®
-    if (DxLib_Init() == -1)							// ‚c‚wƒ‰ƒCƒuƒ‰ƒŠ‰Šú‰»ˆ—
+    ChangeWindowMode(TRUE);							// ã‚¦ã‚£ãƒ³ãƒ‰ã‚¦ãƒ¢ãƒ¼ãƒ‰ã§èµ·å‹•
+    if (DxLib_Init() == -1)							// ï¼¤ï¼¸ãƒ©ã‚¤ãƒ–ãƒ©ãƒªåˆæœŸåŒ–å‡¦ç†
     {
-        return -1;	// ƒGƒ‰[‚ª‹N‚«‚½‚ç’¼‚¿‚ÉI—¹
+        return -1;	// ã‚¨ãƒ©ãƒ¼ãŒèµ·ããŸã‚‰ç›´ã¡ã«çµ‚äº†
     }
 
     /*** Window Init ***/
-    SetWindowText("ƒuƒƒbƒN•ö‚µ");					// ƒEƒBƒ“ƒhƒE‚Ìƒ^ƒCƒgƒ‹
-    SetWindowInitPosition(WIN_POS_X, WIN_POS_Y);	// ƒEƒBƒ“ƒhƒE‚ÌˆÊ’u
-    SetGraphMode(WIN_MAX_X, WIN_MAX_Y, 32);			// ƒEƒBƒ“ƒhƒE‚ÌƒTƒCƒY
-    SetBackgroundColor(0, 0, 0);					// ƒEƒBƒ“ƒhƒE‚Ì”wŒiF
-    SetDrawScreen(DX_SCREEN_BACK);					// •`‰ææ‰æ–Ê‚ð— ‰æ–Ê‚É‚·‚é
-    SetAlwaysRunFlag(TRUE);							// ƒEƒCƒ“ƒhƒE”ñƒAƒNƒeƒBƒuó‘Ô‚Å‚àˆ—‚ð‘±s‚·‚é
+    SetWindowText("ãƒ–ãƒ­ãƒƒã‚¯å´©ã—");					// ã‚¦ã‚£ãƒ³ãƒ‰ã‚¦ã®ã‚¿ã‚¤ãƒˆãƒ«
+    SetWindowInitPosition(WIN_POS_X, WIN_POS_Y);	// ã‚¦ã‚£ãƒ³ãƒ‰ã‚¦ã®ä½ç½®
+    SetGraphMode(WIN_MAX_X, WIN_MAX_Y, 32);			// ã‚¦ã‚£ãƒ³ãƒ‰ã‚¦ã®ã‚µã‚¤ã‚º
+    SetBackgroundColor(0, 0, 0);					// ã‚¦ã‚£ãƒ³ãƒ‰ã‚¦ã®èƒŒæ™¯è‰²
+    SetDrawScreen(DX_SCREEN_BACK);					// æç”»å…ˆç”»é¢ã‚’è£ç”»é¢ã«ã™ã‚‹
+    SetAlwaysRunFlag(TRUE);							// ã‚¦ã‚¤ãƒ³ãƒ‰ã‚¦éžã‚¢ã‚¯ãƒ†ã‚£ãƒ–çŠ¶æ…‹ã§ã‚‚å‡¦ç†ã‚’ç¶šè¡Œã™ã‚‹
 
     Game_Ini();
 
-    /*** FPS‰Šú‰» ***/
+    /*** FPSåˆæœŸåŒ– ***/
     Fps.FPSInit();
 
     /*** Read ***/
     Fon.Read();
 
-    /*** ƒ‹[ƒvˆ— ***/
-    while (ScreenFlip() == 0 &&		// — ‰æ–Ê‚Ì“à—e‚ð•\‰æ–Ê‚É”½‰f
-        ClearDrawScreen() == 0 &&	// ‰æ–Ê‚ð‰Šú‰»
-        Key.GetKey() == 0 &&		// ƒL[ƒ{[ƒh“ü—Íî•ñŽæ“¾
-        ProcessMessage() == 0)		// ƒEƒCƒ“ƒhƒE‚ÌƒƒbƒZ[ƒW‚ðˆ—
+    /*** ãƒ«ãƒ¼ãƒ—å‡¦ç† ***/
+    while (ScreenFlip() == 0 &&		// è£ç”»é¢ã®å†…å®¹ã‚’è¡¨ç”»é¢ã«åæ˜ 
+        ClearDrawScreen() == 0 &&	// ç”»é¢ã‚’åˆæœŸåŒ–
+        Key.GetKey() == 0 &&		// ã‚­ãƒ¼ãƒœãƒ¼ãƒ‰å…¥åŠ›æƒ…å ±å–å¾—
+        ProcessMessage() == 0)		// ã‚¦ã‚¤ãƒ³ãƒ‰ã‚¦ã®ãƒ¡ãƒƒã‚»ãƒ¼ã‚¸ã‚’å‡¦ç†
     {
         Game_Cal();
         Game_Draw();
 
-        /* FPSŒv‘ªŠJŽn */
+        /* FPSè¨ˆæ¸¬é–‹å§‹ */
         Fps.FPSCheck();
 
-        /* –{ˆ— */
+        /* æœ¬å‡¦ç† */
 
 
-        /* FPS•\Ž¦ */
+        /* FPSè¡¨ç¤º */
         DrawFormatStringFToHandle(10, 0, color.White, Fon.FH[10], "FPS:%4.1f", Fps.Average);
 
         /* FPSWait */
         Fps.FPSWait();
     }
 
-    WaitKey();						// ƒL[“ü—Í‘Ò‚¿
+    WaitKey();						// ã‚­ãƒ¼å…¥åŠ›å¾…ã¡
 
-    DxLib_End();					// ‚c‚wƒ‰ƒCƒuƒ‰ƒŠŽg—p‚ÌI—¹ˆ—
+    DxLib_End();					// ï¼¤ï¼¸ãƒ©ã‚¤ãƒ–ãƒ©ãƒªä½¿ç”¨ã®çµ‚äº†å‡¦ç†
 
-    return 0;						// ƒ\ƒtƒg‚ÌI—¹ 
+    return 0;						// ã‚½ãƒ•ãƒˆã®çµ‚äº† 
 }
