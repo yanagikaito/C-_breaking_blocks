@@ -4,10 +4,10 @@
 //#define DEF_SOUND_VALID			// サウンド有効
 
 /*** ウィンドウ設定 ***/
-#define WIN_MAX_X 660			// ウィンドウの横幅
-#define WIN_MAX_Y 450			// ウィンドウの縦幅
+#define WIN_MAX_X 800			// ウィンドウの横幅
+#define WIN_MAX_Y 600			// ウィンドウの縦幅
 #define WIN_POS_X 350			// ウィンドウの初期位置X
-#define WIN_POS_Y 250			// ウィンドウの初期位置Y
+#define WIN_POS_Y 200			// ウィンドウの初期位置Y
 
 /*** キーボード設定 ***/
 #define DEF_KEY_PRESS_TIME 100	// キーボード長押し回数

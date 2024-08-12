@@ -81,6 +81,23 @@ void Game_Draw() {
 						TRUE);
 					break;
 				}
+
+				// ñ‘ñ⁄
+				DrawBox(Block[x][y].x,
+					Block[x][y].y,
+					Block[x][y].x + Block[x][y].w,
+					Block[x][y].y + Block[x][y].h,
+					GetColor(0, 0, 0),
+					FALSE);
+
+				// ç¿ïW
+				DrawFormatString(
+					Block[x][y].x,
+					Block[x][y].y,
+					GetColor(255, 255, 255),
+					"(%d.%d)",
+					Block[x][y].x,
+						Block[x][y].y);
 			}
 		}
 	}
