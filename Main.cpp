@@ -55,13 +55,39 @@ void Game_Draw() {
 	for (int y = 0; y < BLOCK_NUM_Y; y = y + 1) {
 		for (int x = 0; x < BLOCK_NUM_X; x = x + 1) {
 			if (Block[x][y].flag == TRUE) {
-				// ブロックの左上のx座標
+				switch (y) {
+				case 0:
+					// ブロックの左上のx座標
+					DrawBox(Block[x][y].x,
+						// 左上のy座標
+						Block[x][y].y,
+						// 右下のx座標
+						Block[x][y].x + Block[x][y].w,
+						// 右下のy座標
+						Block[x][y].y + Block[x][y].h,
+						GetColor(255, 0, 0),
+						TRUE);
+					break;
+				case 1:
+					DrawBox(Block[x][y].x,
+						Block[x][y].y,
+						Block[x][y].x + Block[x][y].w,
+						Block[x][y].y + Block[x][y].h,
+						GetColor(0, 255, 0),
+						TRUE);
+					break;
+				case 2:
+					DrawBox(Block[x][y].x,
+						Block[x][y].y,
+						Block[x][y].x + Block[x][y].w,
+						Block[x][y].y + Block[x][y].h,
+						GetColor(0, 0, 255),
+						TRUE);
+					break;
+				}
 				DrawBox(Block[x][y].x,
-					// 左上のy座標
 					Block[x][y].y,
-					// 右下のx座標
 					Block[x][y].x + Block[x][y].w,
-					// 右下のy座標
 					Block[x][y].y + Block[x][y].h,
 					GetColor(255, 0, 0),
 					TRUE);
@@ -81,10 +107,6 @@ int WINAPI WinMain(
 	_In_ LPSTR lpCmdLine, 
 	_In_ int nShowCmd)
 {
-
-	ChangeWindowMode(TRUE);							// �E�B���h�E���[�h�ŋN��
-	if (DxLib_Init() == -1)							// �c�w���C�u��������������
-	Col color;
 	ChangeWindowMode(TRUE);							// ウィンドウモードで起動
 	if (DxLib_Init() == -1)							// ＤＸライブラリ初期化処理
 	{
