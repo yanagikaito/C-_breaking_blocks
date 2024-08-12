@@ -3,6 +3,7 @@
 #include "ProjConf.h"
 #include "Sub.h"
 #include "Ract.h"
+#include "math.h"
 
 // ブロック定義
 Ract Block[BLOCK_NUM_X][BLOCK_NUM_Y];
@@ -50,6 +51,38 @@ void Game_Ini() {
     Ball_Speed = { 0,-10 };
 }
 
+// ブロックとボールの接触判定
+bool HitJudg(Ract block, Cir ball) {
+
+    // 円周の座標を計算
+    const double pi = 3.141592;
+    double rad;
+    double x;
+    double y;
+    int circum_x;
+    int circum_y;
+    for (int i = 0; i < 360; i = i + 1) {
+
+        // 円周の座標を計算
+        rad = pi * i / 180;
+        x = cos(rad);
+        y = sin(rad);
+        circum_x = Ball.X + Ball.R * x;
+        circum_y = Ball.Y + Ball.R * y;
+
+        // ボールとブロックが接触したとき
+        if (block.y <= circum_y &&
+            circum_y <= block.y + block.h &&
+            block.x <= circum_x &&
+            circum_x <= block.x + block.w) {
+            return TRUE;
+        }
+    }
+
+    // ボールとブロックが接触しなかったとき
+    return FALSE;
+}
+
 // ゲームを計算する関数
 void Game_Cal() {
 
@@ -60,6 +93,49 @@ void Game_Cal() {
     if (allkey[KEY_INPUT_A] != 0)
     {
         Bar.x = Bar.x - 10;
+    }
+
+    // ブロックとボールの接触判定
+    for (int y = 0; y < BLOCK_NUM_Y; y = y + 1) {
+        for (int x = 0; x < BLOCK_NUM_X; x = x + 1) {
+
+            // ブロックとボールが接触した場合
+            if (Block[x][y].flag == TRUE &&
+                HitJudg(Block[x][y], Ball) == TRUE) {
+
+                // ボールの座標計算
+                Ball_Speed.y = Ball_Speed.y * (-1);
+
+                // ブロック消去
+                Block[x][y].flag = FALSE;
+
+                // ループ抜ける
+                break;
+            }
+        }
+    }
+
+    // ボールがバーに接触したとき
+    if (HitJudg(Bar, Ball) == TRUE) {
+
+        // ボールの速度計算
+        int x = (Ball.X - (Bar.x + Bar.w / 2)) / 10;
+        Ball_Speed.x = x;
+        Ball_Speed.y = Ball_Speed.y * (-1);
+    }
+
+    // ボールが天井に接触したとき
+    if (Ball.Y < 0) {
+
+        // ボールの速度計算
+        Ball_Speed.y = Ball_Speed.y * (-1);
+    }
+
+    // ボールが壁に接触したとき
+    if (Ball.X < 0 || Ball.X > 1600 - 2 * Ball.R) {
+
+        // ボール速度計算
+        Ball_Speed.x = Ball_Speed.x * (-1);
     }
 
     // ボールの座標計算
