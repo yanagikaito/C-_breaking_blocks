@@ -13,6 +13,13 @@ Ract Bar;
 // カラー定義
 Col color;
 
+// ボール定義
+Cir Ball;
+
+// ボールの速度定義
+Speed Ball_Speed;
+
+// キーボード入力情報定義
 char allkey[256];
 
 // ゲームの変数を初期化する関数
@@ -34,7 +41,13 @@ void Game_Ini() {
     }
 
     // バーに関する変数初期化
-    Bar = { 400,600,200,30 };
+    Bar = { 400,600,150,30 };
+
+    // ボールに関する変数初期化
+    Ball = { 450,500,10 };
+
+    // ボールの速度に関する変数初期化
+    Ball_Speed = { 0,-10 };
 }
 
 // ゲームを計算する関数
@@ -130,6 +143,32 @@ void Game_Draw() {
         "(%d.%d)",
         Bar.x,
         Bar.y);
+
+    // Ball
+    DrawCircle(
+        Ball.X,
+        Ball.Y,
+        Ball.R,
+        color.Red,
+        TRUE);
+
+    // 座標
+    DrawFormatString(
+        Ball.X,
+        Ball.Y,
+        color.White,
+        "(%d.%d)",
+        Ball.X,
+        Ball.Y);
+
+    // Ball Speed
+    DrawFormatString(
+        Ball.X,
+        Ball.Y + 20,
+        color.White,
+        "(%d,%d)",
+        Ball_Speed.x,
+        Ball_Speed.y);
 }
 
 /*** Keyクラス ***/

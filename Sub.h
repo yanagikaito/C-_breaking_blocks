@@ -29,6 +29,25 @@ struct Col {
     }
 };
 
+struct Cir {
+    int X, Y, R;
+    Cir()
+        : X(0)
+        , Y(0)
+        , R(0) {
+    }
+
+    Cir(int x, int y, int r) {
+        X = x;
+        Y = y;
+        R = r;
+    }
+};
+
+struct Speed {
+    int x, y;
+};
+
 /*** FPSƒNƒ‰ƒX ***/
 class
 {
