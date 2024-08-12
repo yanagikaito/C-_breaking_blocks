@@ -89,6 +89,15 @@ void Game_Draw() {
 					Block[x][y].y,
 					Block[x][y].x + Block[x][y].w,
 					Block[x][y].y + Block[x][y].h,
+					GetColor(0, 0, 0),
+					FALSE);
+				DrawFormatString(
+					Block[x][y].x,
+					Block[x][y].y,
+					GetColor(255, 255, 255),
+					"(%d.%d)",
+					Block[x][y].x,
+						Block[x][y].y);
 					GetColor(255, 0, 0),
 					TRUE);
 			}
