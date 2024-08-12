@@ -10,6 +10,9 @@ Ract Block[BLOCK_NUM_X][BLOCK_NUM_Y];
 // バー定義
 Ract Bar;
 
+// カラー定義
+Col color;
+
 // ゲームの変数を初期化する関数
 void Game_Ini() {
 
@@ -29,13 +32,13 @@ void Game_Ini() {
 	}
 
 	// バーに関する変数初期化
-	Bar = { 700,700,200,30 };
+	Bar = { 400,600,200,30 };
 }
 
 // ゲームを計算する関数
 void Game_Cal() {
 
-	}
+}
 // ゲームを描画する関数
 void Game_Draw() {
 
@@ -53,7 +56,7 @@ void Game_Draw() {
 						Block[x][y].x + Block[x][y].w,
 						// 右下のy座標
 						Block[x][y].y + Block[x][y].h,
-						GetColor(255, 0, 0),
+						color.Red,
 						TRUE);
 					break;
 				case 1:
@@ -65,7 +68,7 @@ void Game_Draw() {
 						Block[x][y].x + Block[x][y].w,
 						// 右下のy座標
 						Block[x][y].y + Block[x][y].h,
-						GetColor(0, 255, 0),
+						color.Green,
 						TRUE);
 					break;
 				case 2:
@@ -77,7 +80,7 @@ void Game_Draw() {
 						Block[x][y].x + Block[x][y].w,
 						// 右下のy座標
 						Block[x][y].y + Block[x][y].h,
-						GetColor(0, 0, 255),
+						color.Blue,
 						TRUE);
 					break;
 				}
@@ -87,20 +90,35 @@ void Game_Draw() {
 					Block[x][y].y,
 					Block[x][y].x + Block[x][y].w,
 					Block[x][y].y + Block[x][y].h,
-					GetColor(0, 0, 0),
+					color.Black,
 					FALSE);
 
 				// 座標
 				DrawFormatString(
 					Block[x][y].x,
 					Block[x][y].y,
-					GetColor(255, 255, 255),
+					color.White,
 					"(%d.%d)",
 					Block[x][y].x,
-						Block[x][y].y);
+					Block[x][y].y);
 			}
 		}
 	}
+
+	// バー
+	DrawBox(Bar.x, Bar.y,
+		Bar.x + Bar.w,
+		Bar.y + Bar.h,
+		color.White,
+		TRUE);
+
+	DrawFormatString(
+		Bar.x,
+		Bar.y,
+		color.Black,
+		"(%d.%d)",
+		Bar.x,
+		Bar.y);
 }
 
 // ゲームオーバー時の処理を行う関数
@@ -109,9 +127,9 @@ void Game_End() {
 }
 // プログラムは WinMain から始まります
 int WINAPI WinMain(
-	_In_ HINSTANCE hInstance, 
-	_In_opt_  HINSTANCE hPrevInstance, 
-	_In_ LPSTR lpCmdLine, 
+	_In_ HINSTANCE hInstance,
+	_In_opt_  HINSTANCE hPrevInstance,
+	_In_ LPSTR lpCmdLine,
 	_In_ int nShowCmd)
 {
 
@@ -125,7 +143,7 @@ int WINAPI WinMain(
 	SetWindowText("ブロック崩し");					// ウィンドウのタイトル
 	SetWindowInitPosition(WIN_POS_X, WIN_POS_Y);	// ウィンドウの位置
 	SetGraphMode(WIN_MAX_X, WIN_MAX_Y, 32);			// ウィンドウのサイズ
-	SetBackgroundColor(255, 255, 255);				// ウィンドウの背景色
+	SetBackgroundColor(0, 0, 0);					// ウィンドウの背景色
 	SetDrawScreen(DX_SCREEN_BACK);					// 描画先画面を裏画面にする
 	SetAlwaysRunFlag(TRUE);							// ウインドウ非アクティブ状態でも処理を続行する
 
@@ -133,10 +151,6 @@ int WINAPI WinMain(
 
 	/*** FPS初期化 ***/
 	Fps.FPSInit();
-
-	// カラー定義
-	Col();
-	Col color;
 
 	/*** Read ***/
 	Fon.Read();
@@ -163,7 +177,7 @@ int WINAPI WinMain(
 
 
 		/* FPS表示 */
-		DrawFormatStringFToHandle(10, 0, color.Black, Fon.FH[10], "FPS:%4.1f", Fps.Average);
+		DrawFormatStringFToHandle(10, 0, color.White, Fon.FH[10], "FPS:%4.1f", Fps.Average);
 
 		/* FPSWait */
 		Fps.FPSWait();
