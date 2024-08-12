@@ -280,9 +280,28 @@ private:
 
 }Key;
 
-// ゲームオーバー時の処理を行う関数
-void Game_End() {
+// ゲーム終了時の処理を行う関数
+bool Game_End() {
 
+    bool end = TRUE;
+
+    for (int y = 0; y < BLOCK_NUM_Y; y = y + 1) {
+        for (int x = 0; x < BLOCK_NUM_X; x = x + 1) {
+
+            // １個でもブロックがあればゲーム続行
+            if (Block[x][y].flag == TRUE) {
+                end = FALSE;
+            }
+        }
+    }
+
+    // ボールが落ちてしまったとき
+    if (Ball.Y > 900) {
+
+        end = TRUE;
+    }
+
+    return end;
 }
 // プログラムは WinMain から始まります
 int WINAPI WinMain(
@@ -322,6 +341,11 @@ int WINAPI WinMain(
     {
         Game_Cal();
         Game_Draw();
+
+        if (Game_End() == TRUE) {
+
+            Game_Ini();
+        }
 
         /* FPS計測開始 */
         Fps.FPSCheck();
