@@ -4,8 +4,8 @@
 //#define DEF_SOUND_VALID			// サウンド有効
 
 /*** ウィンドウ設定 ***/
-#define WIN_MAX_X 800			// ウィンドウの横幅
-#define WIN_MAX_Y 600			// ウィンドウの縦幅
+#define WIN_MAX_X 1000			// ウィンドウの横幅
+#define WIN_MAX_Y 850			// ウィンドウの縦幅
 #define WIN_POS_X 350			// ウィンドウの初期位置X
 #define WIN_POS_Y 200			// ウィンドウの初期位置Y
 
