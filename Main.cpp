@@ -197,13 +197,14 @@ void Game_Draw() {
                     FALSE);
 
                 // 座標
-                DrawFormatString(
+            /**    DrawFormatString(
                     Block[x][y].x,
                     Block[x][y].y,
                     color.White,
                     "(%d.%d)",
                     Block[x][y].x,
                     Block[x][y].y);
+                    **/
             }
         }
     }
@@ -216,15 +217,16 @@ void Game_Draw() {
         TRUE);
 
     // バー座標
-    DrawFormatString(
+ /**   DrawFormatString(
         Bar.x,
         Bar.y,
         color.Black,
         "(%d.%d)",
         Bar.x,
         Bar.y);
+          **/
 
-    // Ball
+          // Ball
     DrawCircle(
         Ball.X,
         Ball.Y,
@@ -233,22 +235,42 @@ void Game_Draw() {
         TRUE);
 
     // 座標
-    DrawFormatString(
+ /**   DrawFormatString(
         Ball.X,
         Ball.Y,
         color.White,
         "(%d.%d)",
         Ball.X,
         Ball.Y);
+        **/
 
-    // Ball Speed
+        // Ball Speed
+    /**   DrawFormatString(
+           Ball.X,
+           Ball.Y + 20,
+           color.White,
+           "(%d,%d)",
+           Ball_Speed.x,
+           Ball_Speed.y);
+           **/
+
+           // スコアカウント
+    int score = 0;
+    for (int y = 0; y < BLOCK_NUM_Y; y = y + 1) {
+        for (int x = 0; x < BLOCK_NUM_X; x = x + 1) {
+            if (Block[x][y].flag == FALSE) {
+                score = score + 1;
+            }
+        }
+    }
+
+    // スコア表示
     DrawFormatString(
-        Ball.X,
-        Ball.Y + 20,
+        800,
+        5,
         color.White,
-        "(%d,%d)",
-        Ball_Speed.x,
-        Ball_Speed.y);
+        "Score = %d",
+        score);
 }
 
 /*** Keyクラス ***/
