@@ -43,16 +43,44 @@ void Game_Draw() {
 	for (int y = 0; y < BLOCK_NUM_Y; y = y + 1) {
 		for (int x = 0; x < BLOCK_NUM_X; x = x + 1) {
 			if (Block[x][y].flag == TRUE) {
-				// ブロックの左上のx座標
-				DrawBox(Block[x][y].x,
-					// 左上のy座標
-					Block[x][y].y,
-					// 右下のx座標
-					Block[x][y].x + Block[x][y].w,
-					// 右下のy座標
-					Block[x][y].y + Block[x][y].h,
-					GetColor(255, 0, 0),
-					TRUE);
+				switch (y) {
+				case 0:
+					// ブロックの左上のx座標
+					DrawBox(Block[x][y].x,
+						// 左上のy座標
+						Block[x][y].y,
+						// 右下のx座標
+						Block[x][y].x + Block[x][y].w,
+						// 右下のy座標
+						Block[x][y].y + Block[x][y].h,
+						GetColor(255, 0, 0),
+						TRUE);
+					break;
+				case 1:
+					// ブロックの左上のx座標
+					DrawBox(Block[x][y].x,
+						// 左上のy座標
+						Block[x][y].y,
+						// 右下のx座標
+						Block[x][y].x + Block[x][y].w,
+						// 右下のy座標
+						Block[x][y].y + Block[x][y].h,
+						GetColor(0, 255, 0),
+						TRUE);
+					break;
+				case 2:
+					// ブロックの左上のx座標
+					DrawBox(Block[x][y].x,
+						// 左上のy座標
+						Block[x][y].y,
+						// 右下のx座標
+						Block[x][y].x + Block[x][y].w,
+						// 右下のy座標
+						Block[x][y].y + Block[x][y].h,
+						GetColor(0, 0, 255),
+						TRUE);
+					break;
+				}
 			}
 		}
 	}
