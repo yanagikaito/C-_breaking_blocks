@@ -22,6 +22,8 @@ Cir Ball2;
 // ボールの速度定義
 Speed Ball_Speed;
 
+Speed Ball2_Speed;
+
 // キーボード入力情報定義
 char allkey[256];
 
@@ -87,6 +89,39 @@ bool HitJudg(Rect block, Cir ball) {
     return FALSE;
 }
 
+// ブロックとボールの接触判定
+bool HitJudg2(Rect block, Cir ball2) {
+
+    // 円周の座標を計算
+    const double pi = 3.141592;
+    double rad;
+    double x;
+    double y;
+    int circum_x;
+    int circum_y;
+    for (int i = 0; i < 360; i = i + 1) {
+
+        // 円周の座標を計算
+        rad = pi * i / 180;
+        x = cos(rad);
+        y = sin(rad);
+        circum_x = Ball2.X + Ball2.R * x;
+        circum_y = Ball2.Y + Ball2.R * y;
+
+        // ボールとブロックが接触したとき
+        if (block.y <= circum_y &&
+            circum_y <= block.y + block.h &&
+            block.x <= circum_x &&
+            circum_x <= block.x + block.w) {
+            return TRUE;
+        }
+    }
+
+    // ボールとブロックが接触しなかったとき
+    return FALSE;
+
+}
+
 // ゲームを計算する関数
 void Game_Cal() {
 
@@ -105,10 +140,14 @@ void Game_Cal() {
 
             // ブロックとボールが接触した場合
             if (Block[x][y].flag == TRUE &&
-                HitJudg(Block[x][y], Ball) == TRUE) {
+                HitJudg(Block[x][y], Ball) == TRUE ||
+                Block[x][y].flag == TRUE &&
+                HitJudg2(Block[x][y], Ball2) == TRUE) {
 
                 // ボールの座標計算
                 Ball_Speed.y = Ball_Speed.y * (-1);
+
+                Ball2_Speed.y = Ball2_Speed.y * (-1);
 
                 // ブロック消去
                 Block[x][y].flag = FALSE;
@@ -119,21 +158,27 @@ void Game_Cal() {
         }
     }
 
-
     // ボールがバーに接触したとき
-    if (HitJudg(Bar, Ball) == TRUE) {
+    if (HitJudg(Bar, Ball) == TRUE || HitJudg2(Bar, Ball2) == TRUE) {
 
         // ボールの速度計算
-        int x = (Ball.X - (Bar.x + Bar.w / 2)) / 10;
+        int x = (Ball.X - (Bar.x + Bar.w / 2)) / 50;
         Ball_Speed.x = x;
         Ball_Speed.y = Ball_Speed.y * (-1);
+
+        // ボールの速度計算
+        int x2 = (Ball2.X - (Bar.x + Bar.w / 2)) / 50;
+        Ball2_Speed.x = x2;
+        Ball2_Speed.y = Ball2_Speed.y * (-1);
+
     }
 
     // ボールが天井に接触したとき
-    if (Ball.Y < 0) {
+    if (Ball.Y < 0 || Ball2.Y < 0) {
 
         // ボールの速度計算
         Ball_Speed.y = Ball_Speed.y * (-1);
+        Ball2_Speed.y = Ball2_Speed.y * (-1);
     }
 
     // ボールが壁に接触したとき
@@ -143,9 +188,17 @@ void Game_Cal() {
         Ball_Speed.x = Ball_Speed.x * (-1);
     }
 
+    if (Ball2.X < 0 || Ball2.X > 600 - 2 * Ball2.R) {
+        Ball2_Speed.x = Ball2_Speed.x * (-1);
+    }
+
     // ボールの座標計算
     Ball.Y = Ball.Y + Ball_Speed.y;
     Ball.X = Ball.X + Ball_Speed.x;
+
+    // ボールの座標計算
+    Ball2.Y = Ball2.Y + Ball_Speed.y;
+    Ball2.X = Ball2.X + Ball2_Speed.x;
 }
 // ゲームを描画する関数
 void Game_Draw() {
@@ -249,6 +302,13 @@ void Game_Draw() {
         Ball.Y,
         Ball.R,
         color.Red,
+        TRUE);
+
+    DrawCircle(
+        Ball2.X,
+        Ball2.Y,
+        Ball2.R,
+        color.White,
         TRUE);
 
 
