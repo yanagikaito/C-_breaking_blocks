@@ -17,8 +17,6 @@ Col color;
 // ボール定義
 Cir Ball;
 
-Cir Ball2;
-
 // ボールの速度定義
 Speed Ball_Speed;
 
