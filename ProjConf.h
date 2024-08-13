@@ -19,5 +19,5 @@
 #define GameFPS 60				// İ’è‚µ‚½‚¢FPS
 
 /*** ƒuƒƒbƒN‚ÌŒÂ” ***/
-#define BLOCK_NUM_X (16)
-#define BLOCK_NUM_Y (3)
+#define BLOCK_NUM_X (20)
+#define BLOCK_NUM_Y (4)

@@ -2,20 +2,22 @@
 #include "DxLib.h"
 #include "ProjConf.h"
 #include "Sub.h"
-#include "Ract.h"
+#include "Rect.h"
 #include "math.h"
 
 // ブロック定義
-Ract Block[BLOCK_NUM_X][BLOCK_NUM_Y];
+Rect Block[BLOCK_NUM_X][BLOCK_NUM_Y];
 
 // バー定義
-Ract Bar;
+Rect Bar;
 
 // カラー定義
 Col color;
 
 // ボール定義
 Cir Ball;
+
+Cir Ball2;
 
 // ボールの速度定義
 Speed Ball_Speed;
@@ -31,11 +33,11 @@ void Game_Ini() {
         for (int x = 0; x < BLOCK_NUM_X; x = x + 1) {
             Block[x][y] = {
                 // 幅が100
-                x * 100 ,
-                50 + y * 50,
-                100,
-                // 高さが50
+                x * 50,
+                50 + y * 25,
                 50,
+                // 高さが50
+                25,
                 // ボールが全て存在する
                 TRUE };
         }
@@ -47,12 +49,14 @@ void Game_Ini() {
     // ボールに関する変数初期化
     Ball = { 450,500,10 };
 
+    Ball2 = { 550,500,10 };
+
     // ボールの速度に関する変数初期化
     Ball_Speed = { 0,-10 };
 }
 
 // ブロックとボールの接触判定
-bool HitJudg(Ract block, Cir ball) {
+bool HitJudg(Rect block, Cir ball) {
 
     // 円周の座標を計算
     const double pi = 3.141592;
@@ -114,6 +118,7 @@ void Game_Cal() {
             }
         }
     }
+
 
     // ボールがバーに接触したとき
     if (HitJudg(Bar, Ball) == TRUE) {
@@ -186,6 +191,18 @@ void Game_Draw() {
                         color.Blue,
                         TRUE);
                     break;
+                case 3:
+                    // ブロックの左上のx座標
+                    DrawBox(Block[x][y].x,
+                        // 左上のy座標
+                        Block[x][y].y,
+                        // 右下のx座標
+                        Block[x][y].x + Block[x][y].w,
+                        // 右下のy座標
+                        Block[x][y].y + Block[x][y].h,
+                        color.White,
+                        TRUE);
+                    break;
                 }
 
                 // 網目
@@ -233,6 +250,7 @@ void Game_Draw() {
         Ball.R,
         color.Red,
         TRUE);
+
 
     // 座標
  /**   DrawFormatString(
