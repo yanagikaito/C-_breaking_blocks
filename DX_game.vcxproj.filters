@@ -26,7 +26,7 @@
     <ClInclude Include="Sub.h">
       <Filter>ヘッダー ファイル</Filter>
     </ClInclude>
-    <ClInclude Include="Ract.h">
+    <ClInclude Include="Rect.h">
       <Filter>ヘッダー ファイル</Filter>
     </ClInclude>
   </ItemGroup>
