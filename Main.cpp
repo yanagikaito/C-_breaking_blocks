@@ -5,9 +5,6 @@
 #include "Rect.h"
 #include "math.h"
 
-// ブロック定義
-Rect Block[BLOCK_NUM_X][BLOCK_NUM_Y];
-
 // バー定義
 Rect Bar;
 
@@ -33,7 +30,7 @@ void Game_Ini() {
     // ブロックに関する変数初期化
     for (int y = 0; y < BLOCK_NUM_Y; y = y + 1) {
         for (int x = 0; x < BLOCK_NUM_X; x = x + 1) {
-            Block[x][y] = {
+            struct Rect block = {
                 // 幅が100
                 x * 50,
                 50 + y * 25,
@@ -42,6 +39,8 @@ void Game_Ini() {
                 25,
                 // ボールが全て存在する
                 TRUE };
+            struct Rect* p;
+            p = &block;
         }
     }
 
@@ -125,6 +124,8 @@ bool HitJudg2(Rect block, Cir ball2) {
 // ゲームを計算する関数
 void Game_Cal() {
 
+    struct Rect Block[BLOCK_NUM_X][BLOCK_NUM_Y];
+
     if (allkey[KEY_INPUT_D] != 0)
     {
         Bar.x = Bar.x + 10;
@@ -202,6 +203,8 @@ void Game_Cal() {
 }
 // ゲームを描画する関数
 void Game_Draw() {
+
+    struct Rect Block[BLOCK_NUM_X][BLOCK_NUM_Y];
 
     // ブロック
     for (int y = 0; y < BLOCK_NUM_Y; y = y + 1) {
@@ -382,6 +385,8 @@ private:
 
 // ゲーム終了時の処理を行う関数
 bool Game_End() {
+
+    struct Rect Block[BLOCK_NUM_X][BLOCK_NUM_Y];
 
     bool end = TRUE;
 
